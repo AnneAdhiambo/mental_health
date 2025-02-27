@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 50%; margin: auto; border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto; }
+        input, button { padding: 10px; margin: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Chatbot</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        async function sendMessage() {
+            let userMessage = document.getElementById("userInput").value;
+            if (!userMessage) return;
+
+            // Display user message
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+
+            // Send request to API
+            let response = await fetch("http://127.0.0.1:8000/api/chatbot/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage })
+            });
+
+            let data = await response.json();
+
+            // Display chatbot response
+            chatbox.innerHTML += `<p><strong>Bot:</strong> ${data.response}</p>`;
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+
+</body>
+</html>

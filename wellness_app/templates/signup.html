@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content %}
+<style>
+/* Container */
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+/* Title */
+.signup-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Error Messages */
+.error-messages {
+    padding: 10px;
+    background-color: #fdecea;
+    color: #e74c3c;
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Submit Button */
+.submit-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+</style>
+
+<div class="signup-container">
+  <h1 class="signup-title">Sign up</h1>
+  <form method="POST" action=".">
+      {% csrf_token %}
+      <!-- Username Field -->
+      <div class="form-group">
+          <label for="username">Username</label>
+          {{ form.username }}
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+          <label for="password1">Password</label>
+          {{ form.password1 }}
+      </div>
+
+      <!-- Repeat Password Field -->
+      <div class="form-group">
+          <label for="password2">Repeat Password</label>
+          {{ form.password2 }}
+      </div>
+
+      <!-- Error Messages -->
+      {% if form.errors or form.non_field_errors %}
+      <div class="error-messages">
+          {% for field in form %}
+          {{ field.errors }}
+          {% endfor %}
+          {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+
+      <!-- Submit Button -->
+      <button class="submit-button" type="submit">Submit</button>
+  </form>
+</div>
+
+{% endblock %}

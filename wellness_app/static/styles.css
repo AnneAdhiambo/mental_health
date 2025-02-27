@@ -1,0 +1,99 @@
+/* General Body Styling */
+.navbar {
+    background-color: #4CAF50; /* Green background */
+    position: fixed; /* Fix it to the top */
+    top: 0; /* Align to the top of the page */
+    left: 0;
+    width: 100%; /* Full-width */
+    display: flex;
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center;
+    padding: 20px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    z-index: 1000; /* Ensure it's above other elements */
+
+}
+body {
+    background-color: #fefbe9;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    height: 100vh; /* Viewport height */
+    overflow-y: scroll; /* Allow vertical scrolling */
+}
+
+/* Container */
+/* .container {
+    max-width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  
+} */
+
+/* Heading Styling */
+h2 {
+    text-align: center;
+    color: #444;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Button Styling */
+button {
+    background-color: #007bff;
+    background-color: #fefbe9;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Today's Activities Section */
+.activities {
+    margin-top: 20px;
+}
+
+.activities h3 {
+    font-size: 20px;
+    color: #555;
+}
+
+.activities p {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}

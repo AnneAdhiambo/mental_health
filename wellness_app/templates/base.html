@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title %}Mental Health Project{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+    .body {
+    height: 100%;
+    overflow-y: auto; /* Ensures vertical scrolling is enabled */
+    margin: 0;
+    padding: 0;
+}
+.icon-home {
+        color: #f39c12; /* Orange color */
+    }
+
+    .icon-mood {
+        color: #e74c3c; /* Red color */
+    }
+
+    .icon-activity {
+        color: #2ecc71; /* Green color */
+    }
+
+    .icon-journal {
+        color: #3498db; /* Blue color */
+    }
+
+    .icon-logout {
+        color: #9b59b6; /* Purple color */
+    }
+
+    .icon-login {
+        color: #16a085; /* Teal color */
+    }
+
+    /* Change color of the icon when clicked (active state) */
+    .nav-link:active i {
+        color: #ff6347;  /* Tomato color on click */
+    }
+
+    /* Hover effect */
+    .nav-link:hover i {
+        color: #007bff;  /* Blue color when hovered */
+    }
+
+    /* Color change when the link is focused or active */
+    .nav-link:focus i, .nav-link.active i {
+        color: #ff6347;  /* Tomato color when the link is focused or active */
+    }
+.nav-link i {
+        font-size: 1.5rem;  /* Larger icons for visibility */
+        transition: color 0.3s ease;  /* Smooth transition for color change */
+    }
+       /* Navbar Styling */
+.navbar {
+    background-color: #86af4c; /* Green background for branding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 0.5rem 1rem; /* Reduce vertical and horizontal padding */
+    height: 50px; /* Set a specific height if needed */
+}
+.nav-link:active {
+        color: #007bff;  /* Blue color for text when clicked */
+    }
+
+    .nav-link:active i {
+        color: #007bff;  /* Blue color for icons when clicked */
+    }
+
+.navbar {
+    position: sticky; /* Keeps the navbar visible while allowing scrolling */
+    top: 0;
+    z-index: 1000;
+}
+.navbar-logo {
+        height: 40px; /* Adjust to desired size */
+        width: auto; /* Maintain aspect ratio */
+    }
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff; /* White text for contrast */
+    font-size: 1.2em; /* Adjust font size to fit smaller navbar */
+}
+
+.navbar-brand:hover {
+    color: #f1f1f1; /* Slightly lighter color on hover */
+}
+
+.nav-link {
+    color: #fff; /* White text for links */
+    font-size: 1em; /* Slightly smaller font size */
+    margin-right: 15px; /* Spacing between links */
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ddd; /* Light gray hover effect */
+}
+
+.navbar-toggler {
+    border: none;
+    color: #fff; /* White color for toggle button */
+    padding: 0.25rem 0.5rem; /* Reduce padding for smaller toggle */
+}
+
+.navbar-toggler-icon {
+    background-color: #fff; /* White icon for toggle */
+    width: 20px; /* Adjust size for smaller navbar */
+    height: 20px;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="/static/img9.png" alt="Journal Image" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <!-- Home with Icon -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <!-- Mood Tracker with Icon -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mood_tracker' %}">
+                        <i class="fas fa-smile"></i> Mood Tracker
+                    </a>
+                </li>
+                <!-- Activities with Icon -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'activities' %}">
+                        <i class="fas fa-running"></i> Activities
+                    </a>
+                </li>
+                <!-- Journal with Icon -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'journal' %}">
+                        <i class="fas fa-book"></i> Journal
+                    </a>
+                </li>
+            </ul>
+    
+            <!-- Login/Logout to the far right -->
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="form-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                {% endif %}
+              
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer
+    <footer class="footer">
+        <p>&copy; 2024 Mental Health Project</p>
+    </footer> -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

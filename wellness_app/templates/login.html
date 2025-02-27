@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+.navbar {
+    background-color: #4CAF50; /* Green background */
+    position: fixed; /* Fix it to the top */
+    top: 0; /* Align to the top of the page */
+    left: 0;
+    width: 100%; /* Full-width */
+    display: flex;
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center;
+    padding: 20px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.navbar {
+    background-color: #86af4c; /* Green background for branding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 0.5rem 1rem; /* Reduce vertical and horizontal padding */
+    height: 50px; /* Set a specific height if needed */
+}
+
+/* Login container styling */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+/* Title styling */
+.login-container h1 {
+    font-size: 24px;
+    color: #4CAF50; /* Green color for emphasis */
+    margin-bottom: 20px;
+}
+
+/* Input fields styling */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Login button styling */
+.login-container button {
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.login-container button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Sign-up link styling */
+.login-container a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+h2 {
+    margin-top: 100px; /* Adjust this value to control the spacing */
+    font-size: 24px; /* Optional: Adjust font size */
+    color: #333; /* Optional: Change text color */
+    text-align: center;
+}
+p {
+    margin-top: 60px; /* Adjust this value to control the spacing */
+    font-size: 14px; /* Optional: Adjust font size */
+    color: blue; /* Optional: Change text color */
+    text-align: center;
+}
+
+</style>
+
+    <h2>Login</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="login-container">
+            <h1>Login</h1>
+            <form action="/login/" method="POST">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="/signup/">Sign up here</a></p>
+        </div>
+{% endblock %}
